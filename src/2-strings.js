@@ -4,25 +4,25 @@ import {
 } from 'ramda';
 
 describe('2. strings', () => {
-  xdescribe('join', () => {
+  describe('join', () => {
     it('will join strings together, interspersing the first argument', () => {
-      join(',', [REPLACE_ME, 'other thing'])
+      join(',', ['thing', 'other thing'])
         .should.be.eql('thing,other thing');
     });
     it('is curried', () => {
       join(',')(['thing', 'other thing'])
-        .should.be.eql(REPLACE_ME);
+        .should.be.eql('thing,other thing');
     });
   });
-  xdescribe('concat', () => {
+  describe('concat', () => {
     it('only accepts two arguments', () => {
-      concat('1', REPLACE_ME, '3').should.be.eql('12');
+      concat('1', '2', '3').should.be.eql('12');
     });
     it('joins two strings together with no interspersing', () => {
-      concat(REPLACE_ME).should.be.eql('thingother thing');
+      concat('thing', 'other thing').should.be.eql('thingother thing');
     });
     it('is curried', () => {
-      concat('1')(REPLACE_ME).should.be.eql('12');
+      concat('1')('2').should.be.eql('12');
     });
   });
 });

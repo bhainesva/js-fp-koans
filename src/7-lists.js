@@ -17,32 +17,32 @@ const data = [
 ];
 
 // getName :: { String: a } -> a
-const getName = prop(REPLACE_ME); // eslint-disable-line
+const getName = prop('name'); // eslint-disable-line
 
 // isSoda :: { String: a } -> Bool
-const isSoda = propEq('type', REPLACE_ME); // eslint-disable-line
+const isSoda = propEq('type', 'soda'); // eslint-disable-line
 
 describe('7. lists', () => {
-  xdescribe('head', () => {
+  describe('head', () => {
     it('should take the first item in a list', () => {
-      head(data).should.be.eql({name: REPLACE_ME, type: 'soda'});
+      head(data).should.be.eql({name: 'pepsi', type: 'soda'});
     });
     it('returns undefined when given an empty list', () => {
-      expect(head([])).to.be.eql(REPLACE_ME);
+      expect(head([])).to.be.eql(undefined);
     });
   });
-  xdescribe('tail', () => {
+  describe('tail', () => {
     it('should take everything but the first item in a list', () => {
       tail(data).should.be.eql([
-        {name: REPLACE_ME, type: 'soda'},
+        {name: 'coke', type: 'soda'},
         {name: 'oj', type: 'juice'},
       ]);
     });
     it('returns an empty list when given an empty list', () => {
-      tail([]).should.be.eql(REPLACE_ME);
+      tail([]).should.be.eql([]);
     });
   });
-  xdescribe('init', () => {
+  describe('init', () => {
     it('returns everything but the last value', () => {
       init(data).should.be.eql([
         {name: 'pepsi', type: 'soda'},
@@ -50,75 +50,75 @@ describe('7. lists', () => {
       ]);
     });
     it('returns an empty list when given an empty list', () => {
-      init(REPLACE_ME).should.be.eql([]);
+      init([]).should.be.eql([]);
     });
   });
-  xdescribe('last', () => {
+  describe('last', () => {
     it('returns the last element of a list', () => {
-      last(data).should.be.eql(REPLACE_ME);
+      last(data).should.be.eql({name: 'oj', type: 'juice'});
     });
     it('returns an empty list when given an empty list', () => {
-      expect(last([])).to.be.eql(REPLACE_ME);
+      expect(last([])).to.be.eql(undefined);
     });
   });
-  xdescribe('length', () => {
+  describe('length', () => {
     it('returns the length of the list', () => {
-      length(data).should.be.eql(REPLACE_ME);
+      length(data).should.be.eql(3);
     });
   });
-  xdescribe('map', () => {
+  describe('map', () => {
     it('applies a function to every member of a list', () => {
-      map(REPLACE_ME, data).should.be.eql([
+      map(getName, data).should.be.eql([
         'pepsi', 'coke', 'oj',
       ]);
     });
     it('is curried', () => {
-      map(REPLACE_ME)(data).should.be.eql([
+      map(getName)(data).should.be.eql([
         'pepsi', 'coke', 'oj',
       ]);
     });
   });
-  xdescribe('filter', () => {
+  describe('filter', () => {
     it('will only keep items that return true for the predicate', () => {
-      filter(REPLACE_ME, data).should.be.eql([
+      filter(isSoda, data).should.be.eql([
         {name: 'pepsi', type: 'soda'},
         {name: 'coke', type: 'soda'},
       ]);
     });
     it('is curried', () => {
-      filter(REPLACE_ME)(data).should.be.eql([
+      filter(isSoda)(data).should.be.eql([
         {name: 'pepsi', type: 'soda'},
         {name: 'coke', type: 'soda'},
       ]);
     });
   });
-  xdescribe('reduce', () => {
+  describe('reduce', () => {
     const incSodaCount = (count, drink) => drink.type === 'soda'
       ? count + 1
       : count;
     it('will accumulate a value, by traversing a list', () => {
-      reduce(incSodaCount, 0, data).should.be.eql(REPLACE_ME);
+      reduce(incSodaCount, 0, data).should.be.eql(2);
     });
     it('is curried', () => {
-      reduce(REPLACE_ME)(0, data).should.be.eql(2);
-      reduce(REPLACE_ME, 0)(data).should.be.eql(2);
-      reduce(REPLACE_ME)(0)(data).should.be.eql(2);
+      reduce(incSodaCount)(0, data).should.be.eql(2);
+      reduce(incSodaCount, 0)(data).should.be.eql(2);
+      reduce(incSodaCount)(0)(data).should.be.eql(2);
     });
   });
-  xdescribe('adjust', () => {
+  describe('adjust', () => {
     it('will save a value at a given index of a list', () => {
       adjust(always(9), 2, [1, 2, 3, 4, 5])
-        .should.be.eql([1, 2, REPLACE_ME, 4, 5]);
+        .should.be.eql([1, 2, 9, 4, 5]);
     });
     it('is curried', () => {
       adjust(always(9))(2, [1, 2, 3, 4, 5])
-        .should.be.eql([1, 2, REPLACE_ME, 4, 5]);
+        .should.be.eql([1, 2, 9, 4, 5]);
 
       adjust(always(9), 2)([1, 2, 3, 4, 5])
-        .should.be.eql([1, 2, REPLACE_ME, 4, 5]);
+        .should.be.eql([1, 2, 9, 4, 5]);
 
       adjust(always(9))(2)([1, 2, 3, 4, 5])
-        .should.be.eql([1, 2, REPLACE_ME, 4, 5]);
+        .should.be.eql([1, 2, 9, 4, 5]);
     });
   });
 });
